@@ -67,7 +67,10 @@ public class Keychain
   
   public class func clear() -> Bool
   {
-    let query = [ kSecClass as String : kSecClassGenericPassword ]
+    let query = [
+      (kSecClass as String): kSecClassGenericPassword
+    ]
+    
     return SecItemDelete(query as CFDictionaryRef) == noErr
   }
 }
