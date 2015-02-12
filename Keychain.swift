@@ -1,4 +1,3 @@
-import UIKit
 import Security
 
 public class Keychain
