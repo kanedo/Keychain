@@ -1,3 +1,4 @@
+import Foundation
 import Security
 
 public class Keychain
@@ -15,9 +16,9 @@ public class Keychain
   public class func set(key: String, value: NSData) -> Bool
   {
     let query = [
-      (kSecClass as! String)       : kSecClassGenericPassword,
-      (kSecAttrAccount as! String) : key,
-      (kSecValueData as! String)   : value
+      (kSecClass as String)       : kSecClassGenericPassword,
+      (kSecAttrAccount as String) : key,
+      (kSecValueData as String)   : value
     ]
     
     SecItemDelete(query as CFDictionaryRef)
@@ -38,18 +39,18 @@ public class Keychain
   public class func getData(key: String) -> NSData?
   {
     let query = [
-      (kSecClass as! String)       : kSecClassGenericPassword,
-      (kSecAttrAccount as! String) : key,
-      (kSecReturnData as! String)  : kCFBooleanTrue,
-      (kSecMatchLimit as! String)  : kSecMatchLimitOne
+      (kSecClass as String)       : kSecClassGenericPassword,
+      (kSecAttrAccount as String) : key,
+      (kSecReturnData as String)  : kCFBooleanTrue,
+      (kSecMatchLimit as String)  : kSecMatchLimitOne
     ]
     
-    var dataTypeRef: Unmanaged<AnyObject>?
+    var dataTypeRef: AnyObject?
     let status = SecItemCopyMatching(query, &dataTypeRef)
     
     if status == noErr && dataTypeRef != nil
     {
-      return dataTypeRef!.takeRetainedValue() as? NSData
+      return dataTypeRef as? NSData
     }
     
     return nil
@@ -58,8 +59,8 @@ public class Keychain
   public class func delete(key: String) -> Bool
   {
     let query = [
-      (kSecClass as! String)       : kSecClassGenericPassword,
-      (kSecAttrAccount as! String) : key
+      (kSecClass as String)       : kSecClassGenericPassword,
+      (kSecAttrAccount as String) : key
     ]
     
     return SecItemDelete(query as CFDictionaryRef) == noErr
