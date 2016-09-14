@@ -174,7 +174,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 108E0D391D897B2000653CEA /* Build configuration list for PBXProject "KeychainFramework" */;
+			buildConfigurationList = 108E0D391D897B2000653CEA /* Build configuration list for PBXProject "Keychain" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -407,7 +407,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		108E0D391D897B2000653CEA /* Build configuration list for PBXProject "KeychainFramework" */ = {
+		108E0D391D897B2000653CEA /* Build configuration list for PBXProject "Keychain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				108E0D431D897B2000653CEA /* Debug */,
