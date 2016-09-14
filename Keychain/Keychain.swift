@@ -1,11 +1,11 @@
 import Foundation
 import Security
 
-public class Keychain
+open class Keychain
 {
-  public class func set(key: String, value: String) -> Bool
+  open class func set(_ key: String, value: String) -> Bool
   {
-    if let data = value.dataUsingEncoding(NSUTF8StringEncoding)
+    if let data = value.data(using: String.Encoding.utf8)
     {
       return set(key, value: data)
     }
@@ -13,65 +13,65 @@ public class Keychain
     return false
   }
   
-  public class func set(key: String, value: NSData) -> Bool
+  open class func set(_ key: String, value: Data) -> Bool
   {
     let query = [
       (kSecClass as String)       : kSecClassGenericPassword,
       (kSecAttrAccount as String) : key,
       (kSecValueData as String)   : value
-    ]
+    ] as [String : Any]
     
-    SecItemDelete(query as CFDictionaryRef)
+    SecItemDelete(query as CFDictionary)
     
-    return SecItemAdd(query as CFDictionaryRef, nil) == noErr
+    return SecItemAdd(query as CFDictionary, nil) == noErr
   }
   
-  public class func get(key: String) -> NSString?
+  open class func get(_ key: String) -> NSString?
   {
     if let data = getData(key)
     {
-      return NSString(data: data, encoding: NSUTF8StringEncoding)
+      return NSString(data: data, encoding: String.Encoding.utf8.rawValue)
     }
     
     return nil
   }
   
-  public class func getData(key: String) -> NSData?
+  open class func getData(_ key: String) -> Data?
   {
     let query = [
       (kSecClass as String)       : kSecClassGenericPassword,
       (kSecAttrAccount as String) : key,
       (kSecReturnData as String)  : kCFBooleanTrue,
       (kSecMatchLimit as String)  : kSecMatchLimitOne
-    ]
+    ] as [String : Any]
     
     var dataTypeRef: AnyObject?
-    let status = SecItemCopyMatching(query, &dataTypeRef)
+    let status = SecItemCopyMatching(query as CFDictionary, &dataTypeRef)
     
     if status == noErr && dataTypeRef != nil
     {
-      return dataTypeRef as? NSData
+      return dataTypeRef as? Data
     }
     
     return nil
   }
   
-  public class func delete(key: String) -> Bool
+  open class func delete(_ key: String) -> Bool
   {
     let query = [
       (kSecClass as String)       : kSecClassGenericPassword,
       (kSecAttrAccount as String) : key
-    ]
+    ] as [String : Any]
     
-    return SecItemDelete(query as CFDictionaryRef) == noErr
+    return SecItemDelete(query as CFDictionary) == noErr
   }
   
-  public class func clear() -> Bool
+  open class func clear() -> Bool
   {
     let query = [
       (kSecClass as String): kSecClassGenericPassword
     ]
     
-    return SecItemDelete(query as CFDictionaryRef) == noErr
+    return SecItemDelete(query as CFDictionary) == noErr
   }
 }

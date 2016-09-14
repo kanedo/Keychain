@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Keychain.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>KeychainFramework.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -13,6 +18,16 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>108E0D3D1D897B2000653CEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>108E0D511D897BFF00653CEA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>108E0D591D897BFF00653CEA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
